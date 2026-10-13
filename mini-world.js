@@ -18,8 +18,8 @@ for(let [x,z] of [[6,12],[7,25],[33,23],[31,8],[6,6],[34,32],[11,32]]){for(let y
 for(let z=25;z<32;z++)for(let x=15;x<25;x++)if((x-20)**2+(z-28)**2<13)put(x,3,z,8);
 const palette=[[0,0,0],[93,128,71],[92,75,53],[171,179,163],[198,187,148],[133,85,58],[85,68,43],[51,96,56],[87,159,174]];
 let cacheKey='',cache=null;
-export function voxelFrame(t,width=32,height=20){
- const key=`${Math.floor(t*8)}:${width}:${height}`;if(key===cacheKey)return cache;
+export function voxelFrame(t,width=32,height=20,command={enabled:false,x:21,z:25}){
+ const key=`${Math.floor(t*8)}:${width}:${height}:${command.enabled?command.x+","+command.z:"idle"}`;if(key===cacheKey)return cache;
  const pixels=new Uint8Array(width*height*3),angle=Math.sin(t*.12)*.38;
  const ox=20+Math.sin(angle)*17,oy=7+Math.sin(t*.15)*1.15,oz=34+Math.cos(angle)*1.2;
  const tx=20,ty=5.7,tz=17;let fx=tx-ox,fy=ty-oy,fz=tz-oz;
@@ -38,8 +38,13 @@ export function voxelFrame(t,width=32,height=20){
    if(maxX<maxY&&maxX<maxZ){x+=stepX;dist=maxX;maxX+=deltaX;side=0;}else if(maxY<maxZ){y+=stepY;dist=maxY;maxY+=deltaY;side=1;}else{z+=stepZ;dist=maxZ;maxZ+=deltaZ;side=2;}
    if(x<0||x>=N||z<0||z>=N||y<0||y>=H)break;
    material=get(x,y,z);
-   // An authored construction action places a visible small block on the path.
-   if(Math.floor(t/5)%3===1&&x===21&&y===4&&z===25)material=4;
+   // The outer eight-bit adder computes the bridge's X anchor. One explicit command
+   // changes the voxel world; it is not a timed texture or a decorative overlay.
+   if(command.enabled&&Math.abs(x-command.x)<=2&&z>=command.z&&z<=command.z+6){
+    if(y===4)material=4;
+    if(y===5&&Math.abs(x-command.x)===2)material=6;
+    if(y===6&&Math.abs(x-command.x)===2&&z%2===0)material=6;
+   }
    if(material)break;
   }
   let color;if(material){let base=palette[material],shade=[.66,.98,.82][side];shade*=.93+(((x*13+y*7+z*3)%11)/11)*.09;const fog=Math.min(.34,dist*.0045);color=base.map((c,i)=>c*shade*(1-fog)+[137,171,185][i]*fog);if(material===8)color=[80+8*Math.sin(t+px),140,155];}

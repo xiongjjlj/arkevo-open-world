@@ -78,3 +78,22 @@
 
 /* Full-window fallback keeps camera and playback controls available in embedded browsers. */
 body.theater-open{overflow:hidden}.observation-panel.theater,.observation-panel:fullscreen{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;background:#0d100c;padding:16px;overflow:hidden}.observation-panel.theater .screen,.observation-panel:fullscreen .screen{flex:1;min-height:0;aspect-ratio:auto}.observation-panel.theater .screen video,.observation-panel:fullscreen .screen video{object-fit:contain}.observation-panel.theater .transport,.observation-panel:fullscreen .transport{flex:none}.observation-panel.theater .day-selector,.observation-panel:fullscreen .day-selector{display:none}
+
+/* Compact executed evidence: the trace is data from experiments.js. */
+.experiment-evidence{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;font-size:10px;min-width:0}
+.evidence-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font:8px var(--mono);color:var(--accent)}
+.evidence-head>b{font:9px var(--sans);font-weight:500;text-align:right}
+.experiment-evidence[data-status="failed"] .evidence-head,.experiment-evidence[data-status="repairing"] .evidence-head{color:var(--orange)}
+.evidence-target{color:var(--muted);font-size:9px;margin-top:4px}
+.evidence-values{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr) minmax(0,1fr);gap:7px;margin:8px 0 6px}
+.evidence-values>div{min-width:0}.evidence-values dt{font:8px var(--sans);color:var(--dim)}
+.evidence-values dd{font:11px var(--mono);color:var(--text);margin:3px 0 0;overflow-wrap:anywhere;line-height:1.5}
+.experiment-evidence[data-status="failed"] .evidence-values>div:last-child dd,.experiment-evidence[data-status="repairing"] .evidence-values>div:last-child dd{color:var(--orange)}
+.current-action .evidence-detail{font:9px/1.65 var(--sans);min-height:0;margin:5px 0 0;color:var(--muted);overflow-wrap:anywhere}
+.evidence-memory{font:8px/1.6 var(--mono);color:var(--dim);margin-top:5px}
+.truth-table{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}.truth-table>span{font:8px var(--mono);border:1px solid var(--line);padding:3px 5px;color:var(--accent)}
+.truth-table b{font:9px var(--sans);padding-left:5px}.truth-table .fail{border-color:#e5ac7c66;color:var(--orange)}
+.event-row.current .event-kind{color:var(--accent)}.event-row.failure.current .event-kind{color:var(--orange)}
+@media(min-width:851px){.harness-panel{padding-bottom:14px}.harness-panel .current-action{padding-top:12px}.current-action>p{min-height:0}.map-footnote{margin-top:9px;padding-top:9px}}
+@media(max-width:850px){.experiment-evidence{margin-top:12px;padding-top:12px}.evidence-values dd{font-size:12px}.current-action .evidence-detail{font-size:10px}.evidence-target{font-size:10px}.evidence-memory{font-size:9px}}
+@media(min-width:851px) and (max-height:850px){.site-header{height:56px}.intro{padding-top:12px;padding-bottom:14px}.intro h1{font-size:30px;line-height:1.25;margin:6px 0}.intro .eyebrow{font-size:8px}.intro p{font-size:11px;line-height:1.5}.intro-note{gap:5px}.transport{padding-top:11px;padding-bottom:10px}.seek-wrap{margin-bottom:7px}}
