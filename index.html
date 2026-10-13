@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101312">
+<meta name="description" content="ARKEVO 开放世界观测台。观察一个 Agent 如何在持续的尝试、验证与经验积累中，从第一座结构走向世界中的世界。">
+<title>ARKEVO — 智能，在世界中生长</title>
+<link rel="icon" type="image/svg+xml" href="assets/mark.svg"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="#observation" aria-label="ARKEVO 观测台"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 26 14 5h5l10 21h-7l-6-13-6 13Z"/><path d="M14 21h5l3 5H12Z" opacity=".5"/></svg><span>ARKEVO</span><span class="brand-divider"></span><span class="brand-lab">NEO LAB</span></a>
+<nav aria-label="主导航"><a class="active" href="#observation">观测台</a><a href="#system">运行架构</a><a href="#evolution">演化档案</a></nav>
+<button class="about-link" id="aboutOpen">关于这次实验 <span>↗</span></button>
+</header>
+<main>
+<section class="intro" id="observation">
+<div><div class="eyebrow"><span class="tiny-cross">✳</span> OPEN-WORLD INTELLIGENCE <span class="slash">/</span> EXPERIMENT 001</div><h1>智能，在世界中生长<span>。</span></h1><p>让模型进入一个世界，经历失败，积累经验，再创造出下一个世界。</p></div>
+<div class="intro-note"><span class="broadcast-tag"><i></i> 观测窗口已开启</span><span class="mono">ONE AGENT. AN OPEN WORLD.</span><span>4 个成长节点 · 240 秒演化切片</span></div>
+</section>
+<div class="workspace">
+<section class="observation-panel" aria-label="开放世界影像">
+<div class="screen" id="screen">
+<video id="worldVideo" playsinline muted preload="auto" poster="assets/day-5.jpg" aria-label="开放世界预录演示视频"></video>
+<canvas id="worldCanvas" aria-label="与影像同步的三维观察视角"></canvas>
+<div class="screen-vignette"></div>
+<div class="screen-top"><span class="world-label"><span class="coordinate-mark">⌖</span> ECHO ISLAND <span>开放世界 01</span></span><span class="replay-label"><i></i> PRE-RECORDED <b>演示影像</b></span></div>
+<div class="screen-day"><span class="mono" id="screenDay">DAY 05</span><span id="screenTitle">让结构成为系统</span></div>
+<div class="camera-label"><span class="camera-dot"></span><span id="cameraName">DIRECTOR / 导演视角</span></div>
+<div class="world-caption"><span class="caption-kicker" id="captionKicker">VERIFY · 结构验证</span><strong id="captionTitle">从单体建筑，到协同运作的整体。</strong><span class="caption-body" id="captionBody">闭环的价值，体现在下一次尝试里。</span></div>
+<div class="recording-state" id="mediaState" role="status" hidden></div>
+<div class="screen-corner c1"></div><div class="screen-corner c2"></div>
+</div>
+<div class="transport">
+<div class="seek-wrap"><label class="sr-only" for="seek">播放进度</label><input id="seek" type="range" min="0" max="60" step=".1" value="0"><div class="seek-ticks"><span>观察</span><span>尝试</span><span>验证</span><span>修正</span><span>复验</span></div></div>
+<div class="control-row"><div class="playback-controls"><button id="play" class="icon-button" aria-label="暂停" title="暂停"><svg class="pause-icon" viewBox="0 0 20 20"><path d="M6 4v12M14 4v12"/></svg></button><span class="timecode"><b id="elapsed">00:00</b><span>/ 01:00</span></span><button class="speed-button" id="speed" aria-label="播放速度">1×</button><button class="icon-button muted" id="mute" aria-label="开启环境音" title="开启环境音"><svg viewBox="0 0 20 20"><path d="m3 8 4 0 5-4v12l-5-4H3zM15 7l4 6m0-6-4 6"/></svg></button></div><div class="camera-switch" role="group" aria-label="观察机位"><button class="selected" data-camera="director">导演</button><button data-camera="agent">Agent 视角</button><button data-camera="detail">结构特写</button></div><a class="icon-button download-button" id="download" href="assets/day-10.mp4" download="ARKEVO-Day-10.mp4" aria-label="下载当前影像" title="下载当前影像"><svg viewBox="0 0 20 20"><path d="M10 3v10m-4-4 4 4 4-4M4 14v3h12v-3"/></svg></a><button class="icon-button" id="fullscreen" aria-label="全屏观看" title="全屏观看"><svg viewBox="0 0 20 20"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m6 0h4v-4"/></svg></button></div>
+</div>
+<div class="day-selector" role="group" aria-label="选择成长节点"></div>
+</section>
+<aside class="harness-panel" id="system">
+<div class="panel-heading"><div><span class="eyebrow">BEHIND THE WORLD</span><h2>Harness <span>运行结构</span></h2></div><span class="sync-tag"><i></i><span id="syncText">画面同步</span></span></div>
+<div class="harness-map" id="harnessMap">
+<div class="map-rail"></div>
+<button class="module sensor" data-module="perception"><span class="module-symbol">⌘</span><span><b>Perception</b><small>视觉 · 空间 · 状态</small></span><em class="module-status" id="perceptionStatus">观察中</em></button>
+<div class="map-connector"><span>多模态观测</span><i>↓</i></div>
+<button class="module model" data-module="model"><span class="model-emblem">A</span><span><small>ARKEVO MODEL</small><b>理解世界，提出下一步</b></span><span class="model-pulse"><i></i><i></i><i></i><i></i><i></i></span></button>
+<div class="map-connector small"><span>目标 → 行动</span><i>↓</i></div>
+<div class="module-pair"><button class="module" data-module="planner"><span class="module-symbol">⋈</span><span><b>Planner</b><small>拆解与修订计划</small></span></button><button class="module" data-module="tools"><span class="module-symbol">⌁</span><span><b>Tool use</b><small>操作环境与工具</small></span></button></div>
+<div class="map-connector small"><span>环境反馈</span><i>↓</i></div>
+<div class="module-pair"><button class="module" data-module="verifier"><span class="module-symbol">✓</span><span><b>Verifier</b><small>测试与结果校验</small></span></button><button class="module" data-module="memory"><span class="module-symbol">▤</span><span><b>Memory</b><small>保存可复用经验</small></span></button></div>
+<div class="adaptation" id="adaptation"><div class="adaptation-top"><button data-module="adaptation" class="adaptation-name"><span>⊞</span><b>Adaptation</b><small>PLUGIN</small></button><button id="adaptToggle" class="switch" role="switch" aria-checked="true" aria-label="接入 Adaptation 模块"><span></span></button></div><p id="adaptDescription">把这次的反馈，变成下一次的能力。</p><div class="loop-track"><span data-phase="0">观察</span><i>→</i><span data-phase="1">尝试</span><i>→</i><span data-phase="2">验证</span><i>→</i><span data-phase="3">修正</span><i>↗</i></div><div class="loop-return"><span>经验回写</span><div></div><span>下一轮</span></div></div>
+</div>
+<div class="current-action"><div><span class="eyebrow">CURRENT EVENT</span><span class="mono" id="eventNumber">05.04</span></div><h3 id="actionTitle">修复结构连接</h3><p id="actionBody">将测试反馈写入方案，再验证同一处连接。</p><div class="action-foot"><span id="actionTag">ADAPTATION → PLANNER</span><button id="eventJump">查看轨迹 <span>↗</span></button></div></div>
+<div class="map-footnote">点击模块查看输入、输出与职责 <span>↗</span></div>
+</aside>
+</div>
+<section class="below-grid" id="trajectory">
+<div class="trajectory-panel"><div class="section-header"><div><span class="eyebrow">OBSERVABLE TRAJECTORY</span><h2>每一次尝试，都留下证据。</h2></div><span class="small-label">公开动作摘要 <span>·</span> 随影像更新</span></div><div class="event-list" id="eventList"></div></div>
+<div class="insight-panel"><div class="section-header"><div><span class="eyebrow">EXPERIENCE, COMPOSED</span><h2>能力如何留下来</h2></div><span class="memory-mark">▤</span></div><div class="memory-card"><span class="memory-code" id="memoryCode">MEMORY / STRUCTURE-03</span><h3 id="memoryTitle">先验证连接，再扩展系统。</h3><p id="memoryBody">把局部测试通过的结构封装为模块，带入下一轮更复杂的建造。</p><div class="memory-tags" id="memoryTags"></div></div><div class="capability-scale"><div><span>本节点的能力边界</span><span class="mono" id="capabilityStage">COMPOSITION</span></div><div class="scale-segments"><i></i><i></i><i></i><i></i></div><p id="capabilityDescription">从搭建单个对象，走向组合多个相互依赖的系统。</p></div></div>
+</section>
+<section class="evolution-section" id="evolution"><div class="section-header"><div><span class="eyebrow">TEN DAYS, ONE CONTINUOUS WORLD</span><h2>从第一次放置，到世界中的世界。</h2></div><p>成长不只是作品变大。<br>是解决下一类问题的方式，发生了变化。</p></div><div class="evolution-grid" id="evolutionGrid"></div></section>
+<section class="manifesto"><span class="eyebrow">THE QUESTION WE CARE ABOUT</span><h2>当工具可以扩展，经验可以积累，<br>智能的边界会在哪里？</h2><div class="manifesto-body"><p>ARKEVO 探索模型与 Harness 的共同演化：模型理解多模态世界，Harness 连接行动、验证与记忆；每一次反馈，为下一次探索提供新的起点。</p><button id="methodOpen">阅读实验说明 <span>↗</span></button></div></section>
+<footer><a class="footer-brand" href="#observation">ARKEVO<span>NEO LAB</span></a><p>原创 3D 预录演示 · 轨迹与模块状态为演示编排 · 不作为模型实测成绩</p><a href="#observation">回到观测台 ↑</a></footer>
+</main>
+<dialog id="moduleDialog"><button class="dialog-close" aria-label="关闭模块详情">×</button><span class="eyebrow" id="moduleKicker">HARNESS MODULE</span><h2 id="moduleTitle"></h2><p class="dialog-lead" id="moduleLead"></p><div class="io-columns"><section><span class="eyebrow">INPUT / 输入</span><p id="moduleInput"></p></section><section><span class="eyebrow">OUTPUT / 输出</span><p id="moduleOutput"></p></section></div><div class="module-example"><span class="eyebrow">在当前节点中</span><p id="moduleExample"></p></div><section id="circuitLab" class="circuit-lab" hidden><div class="circuit-heading"><span class="eyebrow">EXECUTABLE CIRCUIT / 可运行电路</span><span>8 BIT · NAND</span></div><p>调整输入，检查由 NAND 门组成的八位加法器。</p><div class="circuit-inputs"><label>A <input id="inputA" type="number" min="0" max="255" value="127" aria-label="电路输入 A"></label><span>+</span><label>B <input id="inputB" type="number" min="0" max="255" value="1" aria-label="电路输入 B"></label><span>=</span><output id="circuitResult">128</output></div><div class="bit-labels"><span>输出位</span><span>MSB → LSB</span></div><div class="bit-display" id="bitDisplay"></div><div class="circuit-status"><span id="carryResult">CARRY 0</span><span id="circuitCheck">✓ 门级计算与整数结果一致</span></div></section><p class="dialog-note">此处展示系统职责与可观察的执行摘要，不展示模型内部推理过程。</p></dialog>
+<dialog id="aboutDialog"><button class="dialog-close" aria-label="关闭实验说明">×</button><span class="eyebrow">ARKEVO / EXPERIMENT 001</span><h2>把成长过程，放到台前。</h2><p class="dialog-lead">一个开放世界，一项不断提高难度的创造任务，一套能够吸收反馈的运行系统。</p><div class="about-sections"><section><span>01</span><div><h3>观察什么</h3><p>从基础结构、跨越地形，到复杂建筑与嵌套世界，观察 Agent 如何运用工具，并把前一次验证留下的经验带到下一步。</p></div></section><section><span>02</span><div><h3>如何读这块屏幕</h3><p>主画面呈现任务；右侧呈现感知、规划、工具、验证和记忆如何协作。时间轴、执行事件与模块高亮共用同一播放时钟。机位可以切换，模块可以展开查看。</p></div></section><section><span>03</span><div><h3>这次演示的边界</h3><p>本页为原创 3D 场景的预录技术演示。四个“天数”是叙事节点，动作轨迹、模块状态和测试结果均为演示编排；未连接在线模型，不代表真实训练用时、测评结果或已超越人类水平。</p></div></section><section><span>04</span><div><h3>从演示走向真实实验</h3><p>正式实验需要绑定真实环境录像、工具调用日志、版本化记忆与独立评估，让每一次能力变化都能追溯到对应的操作和证据。</p></div></section></div><a class="reference-link" href="https://rsiarena.live/" target="_blank" rel="noopener noreferrer">观测形式参考：RSI Arena ↗</a><a class="reference-link" href="https://www.deepseek.com/harness/en/" target="_blank" rel="noopener noreferrer">可插拔架构参考：DeepSeek Harness ↗</a><a class="reference-link" href="https://github.com/sammyuri/minecraft" target="_blank" rel="noopener noreferrer">计算创造参考：sammyuri / Minecraft in Minecraft ↗</a></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+<script type="module" src="app.js"></script>
+</body></html>

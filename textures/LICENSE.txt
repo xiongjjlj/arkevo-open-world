@@ -1,0 +1,5 @@
+Rock Boulder Cracked, Poly Haven. CC0 public domain. https://polyhaven.com/a/rock_boulder_cracked
+Source files obtained from https://api.polyhaven.com/files/rock_boulder_cracked
+Pine Tree 01 twig textures, Poly Haven. CC0 public domain. https://polyhaven.com/a/pine_tree_01
+Rocky Ridge Pure Sky HDRI, Poly Haven. CC0 public domain. https://polyhaven.com/a/rocky_ridge_puresky
+Water normals from Three.js examples, MIT license. https://github.com/mrdoob/three.js/blob/dev/examples/textures/waternormals.jpg
