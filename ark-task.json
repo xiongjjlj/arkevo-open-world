@@ -7,7 +7,8 @@
     "Create one crop plot away from direct river access and a second extension target.",
     "Provide equal inventories of intake, straight, inclined, vertical, intersection pipes and taps. Pilot the material budget before comparing participants.",
     "Save identical starting state; disable unrelated survival interruptions through agreed settings.",
-    "For repair task, create working irrigation, remove exactly one pipe, save the fault state."
+    "For repair task, create working irrigation, remove exactly one pipe, save the fault state.",
+    "Place target crop plot outside direct water access. Control rain and other water sources. Irrigated HUD alone is insufficient to prove pipe causality."
   ],
   "tasks": [
     {
@@ -26,7 +27,8 @@
   "verification": [
     "Read actual crop plot irrigation state.",
     "Repeat after 30 seconds.",
-    "Capture before/after and connection screenshots."
+    "Capture before/after and connection screenshots.",
+    "Verify irrigation source with a controlled comparison before committing success."
   ],
   "record": [
     "active_seconds",
