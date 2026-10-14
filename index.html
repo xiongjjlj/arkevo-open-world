@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#101312">
 <meta name="description" content="ARKEVO 开放世界观测台。观察一个 Agent 如何在持续的尝试、验证与经验积累中，从第一座结构走向世界中的世界。">
 <title>ARKEVO — 智能，在世界中生长</title>
-<link rel="icon" type="image/svg+xml" href="assets/mark.svg"><link rel="stylesheet" href="style.css?v=4">
+<link rel="icon" type="image/svg+xml" href="assets/mark.svg"><link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 <header class="site-header">
@@ -40,6 +40,7 @@
 <div class="day-selector" role="group" aria-label="选择成长节点"></div>
 </section>
 <aside class="harness-panel" id="system">
+<a class="human-entry" href="challenge.html"><span class="eyebrow">HUMAN PLAYGROUND / 亲自挑战</span><strong>换你，从零造出加法器。 <span>↗</span></strong><small>自由接线 · 真实计时 · 65,536 组验证</small></a>
 <div class="panel-heading"><div><span class="eyebrow">BEHIND THE WORLD</span><h2>Harness <span>运行结构</span></h2></div><span class="sync-tag"><i></i><span id="syncText">画面同步</span></span></div>
 <div class="harness-map" id="harnessMap">
 <div class="map-rail"></div>
@@ -73,5 +74,5 @@
 <dialog id="moduleDialog" aria-labelledby="moduleTitle"><button class="dialog-close" aria-label="关闭模块详情">×</button><span class="eyebrow" id="moduleKicker">HARNESS MODULE</span><h2 id="moduleTitle"></h2><p class="dialog-lead" id="moduleLead"></p><div class="io-columns"><section><span class="eyebrow">INPUT / 输入</span><p id="moduleInput"></p></section><section><span class="eyebrow">OUTPUT / 输出</span><p id="moduleOutput"></p></section></div><div class="module-example"><span class="eyebrow">在当前节点中</span><p id="moduleExample"></p></div><section id="circuitLab" class="circuit-lab" hidden><div class="circuit-heading"><span class="eyebrow">EXECUTABLE CIRCUIT / 可运行电路</span><span>8 BIT · NAND</span></div><p>调整输入，检查由 NAND 门组成的八位加法器。</p><div class="circuit-inputs"><label>A <input id="inputA" type="number" min="0" max="255" value="127" aria-label="电路输入 A"></label><span>+</span><label>B <input id="inputB" type="number" min="0" max="255" value="1" aria-label="电路输入 B"></label><span>=</span><output id="circuitResult">128</output></div><div class="bit-labels"><span>输出位</span><span>MSB → LSB</span></div><div class="bit-display" id="bitDisplay"></div><div class="circuit-status"><span id="carryResult">CARRY 0</span><span id="circuitCheck">✓ 门级计算与整数结果一致</span></div></section><p class="dialog-note">此处展示系统职责与可观察的执行摘要，不展示模型内部推理过程。</p></dialog>
 <dialog id="aboutDialog" aria-labelledby="aboutTitle"><button class="dialog-close" aria-label="关闭实验说明">×</button><span class="eyebrow">ARKEVO / EXPERIMENT 001</span><h2 id="aboutTitle">把成长过程，放到台前。</h2><p class="dialog-lead">一个开放世界，一项不断提高难度的创造任务，一套能够吸收反馈的运行系统。</p><div class="about-sections"><section><span>01</span><div><h3>观察什么</h3><p>从第一道逻辑门、八位加法器，到计算设施与嵌套世界，观察 Agent 如何运用工具，并把前一次验证留下的经验带到下一步。</p></div></section><section><span>02</span><div><h3>如何读这块屏幕</h3><p>主画面默认呈现 Agent 光学传感器的第一人称观测帧；小窗展示同步导演视角，用来理解它所处的环境。点击小窗可交换主副画面。两路影像、执行事件与模块高亮共用一条时间轴。</p></div></section><section><span>03</span><div><h3>这次演示的边界</h3><p>本页为原创 3D 场景的预录技术演示，第一人称画面模拟模型的视觉输入。四个“天数”是叙事节点，动作与时间由演示编排。NAND、八位加法器、RAM 写读和像素寻址测试在浏览器内实际执行；24 秒发现故障、36 秒开始修复、42 秒同输入复验、48 秒保存模拟经验版本。未连接在线模型，不代表模型训练或测评结果。</p></div></section><section><span>04</span><div><h3>从演示走向真实实验</h3><p>当前工具名和经验版本描述确定性模拟中的操作与记录。正式实验还需要在线模型工具调用日志、跨任务持久记忆与独立评估，才能判断模型能力是否发生变化。</p></div></section></div><a class="reference-link" href="https://rsiarena.live/" target="_blank" rel="noopener noreferrer">观测形式参考：RSI Arena ↗</a><a class="reference-link" href="https://www.deepseek.com/harness/en/" target="_blank" rel="noopener noreferrer">可插拔架构参考：DeepSeek Harness ↗</a><a class="reference-link" href="https://github.com/sammyuri/minecraft" target="_blank" rel="noopener noreferrer">计算创造参考：sammyuri / Minecraft in Minecraft ↗</a></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
-<script type="module" src="app.js?v=4"></script>
+<script type="module" src="app.js?v=5"></script>
 </body></html>

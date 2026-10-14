@@ -278,5 +278,12 @@ export function createWorld(canvas, options = {}) {
     }
     camera.position.copy(camPos);camera.lookAt(targetPos);camera.aspect=canvas.width/canvas.height;camera.updateProjectionMatrix();composer.render();
   }
-  return {ready:Promise.all([environmentReady,texturesReady]).then(()=>{frameNumber=0;}),render,setComputeState(state){computeState=state;},setDay(d){day=+d;},setCamera(c){cameraMode=c;},resize(w,h){renderer.setSize(w,h,false);composer.setPixelRatio(renderer.getPixelRatio());composer.setSize(w,h);aoPass.setSize(Math.round(w*renderer.getPixelRatio()*.55),Math.round(h*renderer.getPixelRatio()*.55));camera.aspect=w/h;camera.updateProjectionMatrix();},dispose(){composer.dispose();renderer.dispose();scene.traverse(o=>{o.geometry?.dispose();if(o.material&&o.material.dispose)o.material.dispose();});},renderer,scene,camera};
+  function renderWorkbench(yaw=0,zoom=1,time=0){
+    for(const g of Object.values(dayGroups))g.visible=false;
+    for(const entry of Object.values(instruments))entry.rig.visible=false;
+    for(const o of [robot,drone,toolBeam,probeShaft,probeTip,connectorTool,sparks,scan])o.visible=false;
+    waterMaterial.userData.time.value=time;waterNormals.offset.set(time*.0015,time*.0007);
+    const portrait=canvas.width/canvas.height<1.4,dist=portrait?25:17;camera.fov=36;camera.position.set(Math.sin(yaw)*dist*zoom,6.8*zoom,Math.cos(yaw)*dist*zoom);camera.lookAt(0,4,0);camera.aspect=canvas.width/canvas.height;camera.updateProjectionMatrix();renderer.shadowMap.needsUpdate=true;composer.render();
+  }
+  return {renderWorkbench,ready:Promise.all([environmentReady,texturesReady]).then(()=>{frameNumber=0;}),render,setComputeState(state){computeState=state;},setDay(d){day=+d;},setCamera(c){cameraMode=c;},resize(w,h){renderer.setSize(w,h,false);composer.setPixelRatio(renderer.getPixelRatio());composer.setSize(w,h);aoPass.setSize(Math.round(w*renderer.getPixelRatio()*.55),Math.round(h*renderer.getPixelRatio()*.55));camera.aspect=w/h;camera.updateProjectionMatrix();},dispose(){composer.dispose();renderer.dispose();scene.traverse(o=>{o.geometry?.dispose();if(o.material&&o.material.dispose)o.material.dispose();});},renderer,scene,camera};
 }
