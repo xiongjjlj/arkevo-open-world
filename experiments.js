@@ -1,5 +1,5 @@
 import {nand, fullAdder} from './logic.js';
-import {voxelFrame} from './mini-world.js?v=3';
+import {voxelFrame} from './mini-world.js?v=4';
 
 // Deterministic, seekable simulations. Every result below is computed from the
 // circuit, memory or pixel-addressing model; the film only schedules the actions.

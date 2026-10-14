@@ -1,6 +1,6 @@
 import {mergeGeometries} from './vendor/utils/BufferGeometryUtils.js';
 import {RGBELoader} from './vendor/loaders/RGBELoader.js';
-import {experimentAt} from './experiments.js?v=3';
+import {experimentAt} from './experiments.js?v=4';
 import {stateAt} from './logic.js';
 import * as THREE from './vendor/three.module.js';
 import {EffectComposer} from './vendor/postprocessing/EffectComposer.js';
@@ -222,6 +222,7 @@ export function createWorld(canvas, options = {}) {
   const robot=new THREE.Group();scene.add(robot);cyl(robot,0,.5,0,.54,.38,M.black);let body=cyl(robot,0,1.08,0,.41,.75,M.robot);cyl(robot,0,1.5,0,.45,.12,M.copper);let head=box(robot,0,1.83,.04,.83,.46,.57,M.stoneLight);box(robot,0,1.86,.333,.58,.16,.035,M.black);box(robot,0,1.86,.357,.36,.047,.025,M.cyan);
   for(let s of [-1,1]){let wheel=cyl(robot,s*.54,.4,0,.29,.15,M.dark);wheel.rotation.z=Math.PI/2;let rim=cyl(robot,s*.63,.4,0,.17,.03,M.copper);rim.rotation.z=Math.PI/2;}
   const arm=new THREE.Group();robot.add(arm);arm.position.set(.43,1.45,.04);const upper=beam(arm,new THREE.Vector3(),new THREE.Vector3(.33,.40,.2),.09,M.dark);sphere(arm,.33,.4,.2,.15,M.copper);beam(arm,new THREE.Vector3(.33,.4,.2),new THREE.Vector3(.55,.20,.75),.075,M.stoneLight);sphere(arm,.55,.20,.75,.12,M.cyan);
+  const sensorMast=cyl(robot,0,2.3,.10,.065,1.1,M.dark);const sensorHead=box(robot,0,2.9,.13,.40,.22,.30,M.stoneLight);const sensorLens=box(robot,0,2.9,.292,.23,.10,.035,M.black);
   const drone=new THREE.Group();scene.add(drone);sphere(drone,0,0,0,.25,M.robot);for(let i=0;i<4;i++){let a=i*Math.PI/2+Math.PI/4;beam(drone,new THREE.Vector3(),new THREE.Vector3(Math.sin(a)*.65,0,Math.cos(a)*.65),.05,M.dark);let r=torus(drone,Math.sin(a)*.65,.035,Math.cos(a)*.65,.24,.035,M.dark);r.rotation.x=Math.PI/2;}
   const beamMat=new THREE.LineBasicMaterial({color:'#8dfbf0',transparent:true,opacity:.68});const toolBeam=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]),beamMat);scene.add(toolBeam);
   const probeShaft=make(new THREE.CylinderGeometry(.025,.045,1,12),toolMaterials.probe);const probeTip=sphere(scene,0,0,0,.085,toolMaterials.bad);const connectorTool=new THREE.Group();scene.add(connectorTool);for(let side of [-1,1]){box(connectorTool,side*.11,0,0,.075,.40,.10,M.copper);box(connectorTool,side*.15,-.3,0,.13,.3,.16,M.black);}
@@ -238,7 +239,12 @@ export function createWorld(canvas, options = {}) {
     for(const a of objects){if(a.day!==day)continue;if(a.type==='gyro'){a.o.rotation.x=.8+Math.sin(t*.25)*.25;a.o.rotation.y=t*.18;}if(a.type==='nested')a.o.rotation.y=Math.sin(t*.12)*.21;if(a.type==='pulse')a.o.visible=((a.index+Math.floor(t*2))%8)>1;}
     let a=t*.105;const rr=day===1?5.3:day===2?9.2:day===5?18:29;
     const rig=instruments[day],rigPos=rig.position,inspecting=t>=23;
-    robot.scale.setScalar(day>=5?1.35:1.0);robot.position.set(inspecting?rigPos.x+rig.width*.56:Math.sin(a)*rr,day===2&&inspecting?5.0:.42,inspecting?rigPos.z+1.3:Math.cos(a)*rr);robot.rotation.y=inspecting?-1.40:a+Math.PI/2;arm.rotation.z=inspecting?.26:Math.sin(t*2)*.20;arm.rotation.x=inspecting?-.18:Math.sin(t*1.3)*.16;
+    const bodyScale=day>=5?1.35:1,baseY=day===2?5.0:.42;
+    const approach=smooth(0,22,t),eyeY=rigPos.y+rig.height*.62+(day===10?smooth(46,49,t)*1.6:0),eyeLocal=(eyeY-baseY)/bodyScale;
+    robot.scale.setScalar(bodyScale);robot.position.set(rigPos.x+rig.width*(.10+Math.sin(t*.15)*.055*(1-approach)),baseY,rigPos.z+rig.width*(1.22-.32*approach));robot.rotation.y=Math.PI;
+    arm.rotation.z=t>=24?.26:Math.sin(t*2)*.20;arm.rotation.x=t>=24?-.18:Math.sin(t*1.3)*.16;
+    sensorMast.position.y=(1.85+eyeLocal)/2;sensorMast.scale.y=Math.max(.2,eyeLocal-1.85)/1.1;sensorHead.position.y=eyeLocal;sensorLens.position.y=eyeLocal;
+
     drone.position.set(inspecting?rigPos.x-rig.width*.48:Math.sin(t*.11+1)*rr,inspecting?rigPos.y+rig.height+1:5.0+Math.sin(t*.3)*1.8,inspecting?rigPos.z+1.5:Math.cos(t*.11+1)*rr);drone.rotation.y=-t*.18;
     const patchTarget=rig.right.clone().add(rig.position),testTarget=rig.left.clone().add(rig.position);
     let target=inspecting?(t>=36&&t<42?patchTarget:testTarget):new THREE.Vector3(Math.sin(a+.3)*(rr-.8),day===1?1.4:day===2?4.9:day===5?5.3:11.8,Math.cos(a+.3)*(rr-.8));
@@ -254,8 +260,15 @@ export function createWorld(canvas, options = {}) {
       if(it.type==='command'){const k=experiment.stage;if(k!==it.key){it.key=k;const c=it.canvas.getContext('2d');c.fillStyle='#142822';c.fillRect(0,0,1536,144);c.fillStyle=experiment.fault?'#ebb285':'#c3db9f';c.textBaseline='middle';c.textAlign='center';c.font='600 43px monospace';c.fillText(t>=48?'INPUT 20 + 1  >  X = 21  >  BUILD BRIDGE':t>=42?'STRIDE 64  /  2,560 PIXELS MATCH':'STRIDE 63  /  DISPLAY ADDRESS ERROR',768,72);it.texture.needsUpdate=true;}}
       if(it.type==='screen'){const pixels=experiment.framebuffer;for(let i=0;i<2560;i++){co.setRGB(pixels[i*3]/255,pixels[i*3+1]/255,pixels[i*3+2]/255,THREE.SRGBColorSpace);it.o.setColorAt(i,co);}it.o.instanceColor.needsUpdate=true;}
     }
-    let camPos,targetPos;const activeCamera=cameraMode==='director'?(day===10&&t>=44&&t<54?'screen':t<12?'orbit':t<20?'detail':t<48?'inspection':'orbit'):cameraMode==='agent'?'inspection':cameraMode;
-    if(activeCamera==='screen'){camPos=new THREE.Vector3(1.1,14.0,12.8);targetPos=new THREE.Vector3(0,13.4,-8.5);
+    let camPos,targetPos;const activeCamera=cameraMode==='director'?(day===10&&t>=44&&t<54?'screen':t<12?'orbit':t<48?'detail':'orbit'):cameraMode==='agent'?'firstperson':cameraMode;
+    robot.updateMatrixWorld(true);const sensorEye=new THREE.Vector3(0,eyeLocal,.42).applyMatrix4(robot.matrixWorld);
+    const sensorTarget=new THREE.Vector3(rigPos.x+rig.width*.035,rigPos.y+rig.height*.56,rigPos.z);
+    if(day===10&&t>=46){const lookUp=smooth(46,49,t);sensorTarget.lerp(new THREE.Vector3(0,13.4,-8.5),lookUp);}
+    // The primary feed is the robot's raised optical sensor, with its own body below the eye line.
+    robot.visible=activeCamera!=='firstperson';sensorHead.visible=sensorLens.visible=activeCamera!=='firstperson';
+    camera.fov=activeCamera==='firstperson'?54:42;
+    if(activeCamera==='firstperson'){camPos=sensorEye;targetPos=sensorTarget;
+    }else if(activeCamera==='screen'){camPos=new THREE.Vector3(1.1,14.0,12.8);targetPos=new THREE.Vector3(0,13.4,-8.5);
     }else if(activeCamera==='inspection'){
       camPos=new THREE.Vector3(rigPos.x+rig.width*.17,rigPos.y+rig.height*.63,rigPos.z+rig.width*1.48);targetPos=new THREE.Vector3(rigPos.x,rigPos.y+rig.height*.46,rigPos.z);
     }else if(activeCamera==='detail'){
