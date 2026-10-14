@@ -1,0 +1,43 @@
+{
+  "title": "ARKEVO / WATER FOR THE CAMP",
+  "game": "ARK: Survival Evolved (original; not Survival Ascended)",
+  "status": "task-design-not-executed",
+  "environment": "Single-player or private server, safe riverbank, daytime, pre-unlocked irrigation recipes",
+  "starting_setup": [
+    "Create one crop plot away from direct river access and a second extension target.",
+    "Provide equal inventories of intake, straight, inclined, vertical, intersection pipes and taps. Pilot the material budget before comparing participants.",
+    "Save identical starting state; disable unrelated survival interruptions through agreed settings.",
+    "For repair task, create working irrigation, remove exactly one pipe, save the fault state."
+  ],
+  "tasks": [
+    {
+      "id": "build",
+      "goal": "Connect water to first crop plot"
+    },
+    {
+      "id": "repair",
+      "goal": "Locate and repair one missing pipe without rebuilding everything"
+    },
+    {
+      "id": "extend",
+      "goal": "Irrigate second crop plot while preserving the first"
+    }
+  ],
+  "verification": [
+    "Read actual crop plot irrigation state.",
+    "Repeat after 30 seconds.",
+    "Capture before/after and connection screenshots."
+  ],
+  "record": [
+    "active_seconds",
+    "wall_seconds",
+    "actions",
+    "failed_attempts",
+    "materials_used",
+    "hints_or_guides",
+    "screenshots",
+    "video"
+  ],
+  "fairness": "Same initial save, materials, task and verification for human and agent. No scores exist yet.",
+  "execution": "This file is a task specification; it does not launch the game or provision a server."
+}
